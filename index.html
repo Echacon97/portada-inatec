@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Generador de portada para documentos del Instituto Nacional Tecnológico (INATEC). Crea portadas personalizadas con fecha, lugar, centro, carrera, módulo, tarea y nombres de estudiantes y docente."
+    />
+    <meta
+      name="keywords"
+      content="generador de portada, INATEC, Instituto Nacional Tecnológico, portadas, documentos, PDF"
+    />
+    <meta name="author" content="Deybis Antonio Melendez Vargas" />
+    <meta property="og:title" content="Generador de Portada INATEC PDF" />
+    <meta
+      property="og:description"
+      content="Una herramienta en línea para generar portadas personalizadas para documentos académicos del Instituto Nacional Tecnológico."
+    />
+    <meta property="og:image" content="/inatec_logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Generador de Portada INATEC PDF" />
+    <meta
+      name="twitter:description"
+      content="Una herramienta en línea para generar portadas personalizadas para documentos académicos del Instituto Nacional Tecnológico."
+    />
+    <meta name="twitter:image" content="/inatec_logo.png" />
+    <meta name="twitter:site" content="@DeybisMelendez" />
+    <title>Generador de Portada INATEC PDF</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"
+    />
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Generador de portada de INATEC</h1>
+        <img src="./inatec_logo.png" alt="Logo de INATEC" />
+        <a
+          class="github-button"
+          href="https://github.com/deybismelendez"
+          data-color-scheme="no-preference: light; light: light; dark: dark;"
+          data-size="large"
+          aria-label="Follow @deybismelendez on GitHub"
+          >Follow @deybismelendez</a
+        >
+        <a
+          class="github-button"
+          href="https://github.com/deybismelendez/portada-inatec"
+          data-color-scheme="no-preference: light; light: light; dark: dark;"
+          data-icon="octicon-star"
+          data-size="large"
+          aria-label="Star deybismelendez/portada-inatec on GitHub"
+          >Star</a
+        >
+        <a
+          class="github-button"
+          href="https://github.com/deybismelendez/portada-inatec/fork"
+          data-color-scheme="no-preference: light; light: light; dark: dark;"
+          data-icon="octicon-repo-forked"
+          data-size="large"
+          aria-label="Fork deybismelendez/portada-inatec on GitHub"
+          >Fork</a
+        >
+      </header>
+      <section>
+        <div class="grid">
+          <div>
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" id="fecha" />
+          </div>
+          <div>
+            <label for="lugar">Lugar</label>
+            <input
+              type="text"
+              name="lugar"
+              id="lugar"
+              placeholder="Lugar"
+              value="Managua, Nicaragua"
+            />
+          </div>
+        </div>
+        <div class="grid">
+          <div>
+            <label for="centro">Nombre del centro</label>
+            <input
+              type="text"
+              name="centro"
+              id="centro"
+              placeholder="Centro"
+              value="CENTRO TECNOLÓGICO MANAGUA"
+            />
+          </div>
+          <div>
+            <label for="carrera">Nombre de la carrera</label>
+            <input
+              type="text"
+              name="carrera"
+              id="carrera"
+              placeholder="Carrera"
+              value="TÉCNICO ESPECIALISTA EN DESARROLLO DE SOFTWARE"
+            />
+          </div>
+        </div>
+        <div class="grid">
+          <div>
+            <label for="modulo">Nombre del módulo</label>
+            <input type="text" name="modulo" id="modulo" placeholder="Módulo" />
+          </div>
+          <div>
+            <label for="docente">Nombre del docente</label>
+            <input
+              type="text"
+              name="docente"
+              id="docente"
+              placeholder="Docente"
+            />
+          </div>
+        </div>
+        <div>
+          <label for="tarea">Nombre de la tarea</label>
+          <textarea name="tarea" id="tarea" placeholder="Tarea" ></textarea>
+        </div>
+        <div>
+          <label for="estudiantes">Elaborado por</label>
+          <textarea
+            name="estudiantes"
+            id="estudiantes"
+            placeholder="Elaborado por"
+          ></textarea>
+        </div>
+
+        <button id="generarPDF">Generar PDF</button>
+      </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
