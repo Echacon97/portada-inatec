@@ -95,7 +95,7 @@ class PDFGenerator {
     // Configuración del texto y escritura de encabezados
     this.doc.setFont("times", "bold");
     this.doc.setFontSize(20);
-    this.writeCenteredText("INSTITUTO NACIONAL TECNOLÓGICO (INATEC)", line);
+    this.writeCenteredText("INSTITUTO NACIONAL TECNOLÓGICO", line);
     line += 20;
     this.writeCenteredText(center, line);
     line += 20;
