@@ -3,133 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Generador de portada para documentos de la Universidad Nacional Autónoma de Nicaragua. Crea portadas personalizadas con fecha, lugar, facultad, carrera, clase, tarea y nombres de estudiantes y docente."
-    />
-    <meta
-      name="keywords"
-      content="generador de portada, UNAN, Universidad Nacional Autónoma de Nicaragua, portadas, documentos, PDF"
-    />
     <meta name="author" content="Deybis Antonio Melendez Vargas" />
-    <meta property="og:title" content="Generador de Portada UNAN PDF" />
-    <meta
-      property="og:description"
-      content="Una herramienta en línea para generar portadas personalizadas para documentos académicos de la Universidad Nacional Autónoma de Nicaragua."
-    />
-    <meta property="og:image" content="/unan_logo.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Generador de Portada UNAN PDF" />
-    <meta
-      name="twitter:description"
-      content="Una herramienta en línea para generar portadas personalizadas para documentos académicos de la Universidad Nacional Autónoma de Nicaragua."
-    />
-    <meta name="twitter:image" content="/unan_logo.jpg" />
-    <meta name="twitter:site" content="@DeybisMelendez" />
     <title>Generador de Portada UNAN PDF</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"
-    />
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css" />
   </head>
   <body>
     <main class="container">
-      <header>
+      <header style="text-align: center;">
         <h1>Generador de portada de la UNAN</h1>
-        <img src="./unan_logo.jpg" alt="Logo de la UNAN" />
-        <a
-          class="github-button"
-          href="https://github.com/deybismelendez"
-          data-color-scheme="no-preference: light; light: light; dark: dark;"
-          data-size="large"
-          aria-label="Follow @deybismelendez on GitHub"
-          >Follow @deybismelendez</a
-        >
-        <a
-          class="github-button"
-          href="https://github.com/deybismelendez/portada-unan"
-          data-color-scheme="no-preference: light; light: light; dark: dark;"
-          data-icon="octicon-star"
-          data-size="large"
-          aria-label="Star deybismelendez/portada-unan on GitHub"
-          >Star</a
-        >
-        <a
-          class="github-button"
-          href="https://github.com/deybismelendez/portada-unan/fork"
-          data-color-scheme="no-preference: light; light: light; dark: dark;"
-          data-icon="octicon-repo-forked"
-          data-size="large"
-          aria-label="Fork deybismelendez/portada-unan on GitHub"
-          >Fork</a
-        >
+        <img src="./unan_logo.jpg" alt="Logo de la UNAN" style="max-width: 200px;" />
       </header>
+
       <section>
         <div class="grid">
           <div>
             <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" id="fecha" />
+            <input type="date" id="fecha" />
           </div>
           <div>
             <label for="lugar">Lugar</label>
-            <input
-              type="text"
-              name="lugar"
-              id="lugar"
-              placeholder="Lugar"
-              value="Managua, Nicaragua"
-            />
+            <input type="text" id="lugar" value="Managua, Nicaragua" />
           </div>
         </div>
+
         <div class="grid">
           <div>
             <label for="facultad">Nombre de la facultad</label>
-            <input
-              type="text"
-              name="facultad"
-              id="facultad"
-              placeholder="Facultad"
-              value=""
-            />
+            <input type="text" id="facultad" placeholder="Facultad" />
           </div>
           <div>
             <label for="carrera">Nombre de la carrera</label>
-            <input
-              type="text"
-              name="carrera"
-              id="carrera"
-              placeholder="Carrera"
-              value=""
-            />
+            <input type="text" id="carrera" placeholder="Carrera" />
           </div>
         </div>
+
         <div class="grid">
           <div>
             <label for="clase">Nombre de la clase</label>
-            <input type="text" name="clase" id="clase" placeholder="Clase" />
+            <input type="text" id="clase" placeholder="Asignatura" />
           </div>
           <div>
             <label for="docente">Nombre del docente</label>
-            <input
-              type="text"
-              name="docente"
-              id="docente"
-              placeholder="Docente"
-            />
+            <input type="text" id="docente" placeholder="Docente" />
           </div>
         </div>
+
         <div>
           <label for="tarea">Nombre de la tarea</label>
-          <textarea name="tarea" id="tarea" placeholder="Tarea" ></textarea>
+          <textarea id="tarea" placeholder="Título del trabajo"></textarea>
         </div>
+
         <div>
           <label for="estudiantes">Elaborado por</label>
-          <textarea
-            name="estudiantes"
-            id="estudiantes"
-            placeholder="Elaborado por"
-          ></textarea>
+          <textarea id="estudiantes" placeholder="Integrantes" rows="4"></textarea>
         </div>
 
         <button id="generarPDF">Generar PDF</button>
