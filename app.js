@@ -1,16 +1,12 @@
 const { jsPDF } = window.jspdf;
 
-// Establece la fecha actual en el campo de fecha del formulario
 document.querySelector("#fecha").valueAsDate = new Date();
 
-/**
- * Clase PDFGenerator
- */
 class PDFGenerator {
   constructor() {
     this.doc = new jsPDF({ unit: "px", format: "letter" });
     this.pageWidth = this.doc.internal.pageSize.width;
-    // Nombre del archivo corregido sin espacios
+    // Recuerda renombrar tu archivo a unan_logo.jpg en GitHub
     this.UNAN_LOGO_SRC = "unan_logo.jpg"; 
   }
 
@@ -31,16 +27,15 @@ class PDFGenerator {
   }
 
   getNaturalDate(dateStr) {
-    const months = [
-      "enero", "febrero", "marzo", "abril", "mayo", "junio",
-      "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
-    ];
+    const months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
     const [year, month, day] = dateStr.split("-");
     return `${parseInt(day, 10)} de ${months[parseInt(month, 10) - 1]} de ${year}`;
   }
 
-  writeCenteredText(text, y) {
+  writeCenteredText(text, y, style = "normal", size = 12) {
     if (!text) return;
+    this.doc.setFont("times", style);
+    this.doc.setFontSize(size);
     const textWidth = this.doc.getTextWidth(text);
     const x = (this.pageWidth - textWidth) / 2;
     this.doc.text(text, x, y);
@@ -51,7 +46,6 @@ class PDFGenerator {
     const date = this.getNaturalDate(document.querySelector("#fecha").value);
     const location = document.querySelector("#lugar").value;
     
-    // IDs basados en el script de la UNI
     const faculty = document.querySelector("#facultad").value.toUpperCase();
     const career = document.querySelector("#carrera").value.toUpperCase();
     const subject = document.querySelector("#clase").value.toUpperCase();
@@ -59,62 +53,70 @@ class PDFGenerator {
     const teacher = document.querySelector("#docente").value;
     const students = document.querySelector("#estudiantes").value.split("\n");
 
-    this.doc.setFont("times", "bold");
-    this.doc.setFontSize(16);
-    this.writeCenteredText("UNIVERSIDAD NACIONAL AUTÓNOMA DE NICARAGUA, MANAGUA", line);
-    line += 20;
-    this.writeCenteredText(faculty, line);
-    line += 20;
-    this.writeCenteredText(career, line);
-    line += 30;
+    // 1. Encabezado (Espacio reducido)
+    this.writeCenteredText("UNIVERSIDAD NACIONAL AUTÓNOMA DE NICARAGUA, MANAGUA", line, "bold", 14);
+    line += 18;
+    this.writeCenteredText(faculty, line, "bold", 12);
+    line += 16;
+    this.writeCenteredText(career, line, "bold", 12);
+    line += 25;
 
-    // Cargar logo corregido
-    const logoBase64 = await this.loadUnanLogo();
-    this.doc.addImage(logoBase64, "JPEG", (this.pageWidth - 180) / 2, line, 180, 90);
-    line = 260;
+    // 2. Logo (Centrado y con espacio controlado)
+    try {
+        const logoBase64 = await this.loadUnanLogo();
+        const logoW = 140; // Tamaño un poco más pequeño para ahorrar espacio
+        const logoH = 70;
+        this.doc.addImage(logoBase64, "JPEG", (this.pageWidth - logoW) / 2, line, logoW, logoH);
+        line += 90; // Salto justo después del logo
+    } catch (e) {
+        line += 20;
+    }
 
-    this.doc.setFontSize(18);
-    this.writeCenteredText(subject, line);
-    this.doc.setFont("times", "italic");
+    // 3. Asignatura y Tema
+    this.writeCenteredText(subject, line, "bold", 16);
     line += 20;
     homework.forEach((hLine) => {
-      this.writeCenteredText(hLine, line);
+      this.writeCenteredText(hLine, line, "italic", 14);
       line += 16;
     });
-    line += 40;
 
-    this.doc.setFont("times", "bold");
-    this.doc.setFontSize(12);
-    this.writeCenteredText("Elaborado por:", line);
-    line += 20;
-    this.doc.setFont("times", "normal");
-    students.forEach((s) => {
-      this.writeCenteredText(s, line);
-      line += 16;
-    });
-    line += 20;
-
-    this.doc.setFont("times", "bold");
-    this.writeCenteredText("Docente:", line);
-    line += 20;
-    this.doc.setFont("times", "normal");
-    this.writeCenteredText(teacher, line);
-
-    line = 540;
-    this.doc.setFont("times", "italic");
-    this.writeCenteredText(location, line);
+    // 4. Integrantes (Más compacto)
+    line += 30;
+    this.writeCenteredText("Elaborado por:", line, "bold", 12);
     line += 16;
-    this.writeCenteredText(date, line);
+    students.forEach((s) => {
+      this.writeCenteredText(s, line, "normal", 12);
+      line += 14;
+    });
+
+    // 5. Docente
+    line += 20;
+    this.writeCenteredText("Docente:", line, "bold", 12);
+    line += 16;
+    this.writeCenteredText(teacher, line, "normal", 12);
+
+    // 6. Pie de página
+    const pageHeight = this.doc.internal.pageSize.height;
+    line = pageHeight - 50;
+    this.writeCenteredText(location, line, "italic", 11);
+    line += 14;
+    this.writeCenteredText(date, line, "italic", 11);
 
     this.doc.save("documento-unan.pdf");
   }
 }
 
 document.querySelector("#generarPDF").addEventListener("click", async () => {
+  const btn = document.querySelector("#generarPDF");
   const pdfGen = new PDFGenerator();
   try {
+    btn.disabled = true;
+    btn.innerText = "Generando...";
     await pdfGen.generate();
   } catch (err) {
-    alert("Hubo un error al generar el PDF. Revisa que el logo se llame unan_logo.jpg y esté en la misma carpeta.");
+    alert("Error con el logo. Asegúrate de que el archivo en GitHub se llame unan_logo.jpg sin espacios.");
+  } finally {
+    btn.disabled = false;
+    btn.innerText = "Generar PDF";
   }
 });
