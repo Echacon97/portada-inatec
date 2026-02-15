@@ -10,7 +10,8 @@ class PDFGenerator {
   constructor() {
     this.doc = new jsPDF({ unit: "px", format: "letter" });
     this.pageWidth = this.doc.internal.pageSize.width;
-    this.UNAN_LOGO_SRC = "unan logo.jpg"; 
+    // Nombre del archivo corregido sin espacios
+    this.UNAN_LOGO_SRC = "unan_logo.jpg"; 
   }
 
   async loadUnanLogo() {
@@ -39,6 +40,7 @@ class PDFGenerator {
   }
 
   writeCenteredText(text, y) {
+    if (!text) return;
     const textWidth = this.doc.getTextWidth(text);
     const x = (this.pageWidth - textWidth) / 2;
     this.doc.text(text, x, y);
@@ -48,6 +50,8 @@ class PDFGenerator {
     let line = 40;
     const date = this.getNaturalDate(document.querySelector("#fecha").value);
     const location = document.querySelector("#lugar").value;
+    
+    // IDs basados en el script de la UNI
     const faculty = document.querySelector("#facultad").value.toUpperCase();
     const career = document.querySelector("#carrera").value.toUpperCase();
     const subject = document.querySelector("#clase").value.toUpperCase();
@@ -64,6 +68,7 @@ class PDFGenerator {
     this.writeCenteredText(career, line);
     line += 30;
 
+    // Cargar logo corregido
     const logoBase64 = await this.loadUnanLogo();
     this.doc.addImage(logoBase64, "JPEG", (this.pageWidth - 180) / 2, line, 180, 90);
     line = 260;
@@ -72,8 +77,8 @@ class PDFGenerator {
     this.writeCenteredText(subject, line);
     this.doc.setFont("times", "italic");
     line += 20;
-    homework.forEach((homeworkLine) => {
-      this.writeCenteredText(homeworkLine, line);
+    homework.forEach((hLine) => {
+      this.writeCenteredText(hLine, line);
       line += 16;
     });
     line += 40;
@@ -83,8 +88,8 @@ class PDFGenerator {
     this.writeCenteredText("Elaborado por:", line);
     line += 20;
     this.doc.setFont("times", "normal");
-    students.forEach((student) => {
-      this.writeCenteredText(student, line);
+    students.forEach((s) => {
+      this.writeCenteredText(s, line);
       line += 16;
     });
     line += 20;
@@ -105,7 +110,11 @@ class PDFGenerator {
   }
 }
 
-document.querySelector("#generarPDF").addEventListener("click", () => {
+document.querySelector("#generarPDF").addEventListener("click", async () => {
   const pdfGen = new PDFGenerator();
-  pdfGen.generate();
+  try {
+    await pdfGen.generate();
+  } catch (err) {
+    alert("Hubo un error al generar el PDF. Revisa que el logo se llame unan_logo.jpg y esté en la misma carpeta.");
+  }
 });
