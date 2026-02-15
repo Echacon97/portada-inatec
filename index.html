@@ -5,136 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Generador de portada para documentos del Instituto Nacional Tecnológico . Crea portadas personalizadas con fecha, lugar, centro, carrera, módulo, tarea y nombres de estudiantes y docente."
-    />
-    <meta
-      name="keywords"
-      content="generador de portada, INATEC, Instituto Nacional Tecnológico, portadas, documentos, PDF"
+      content="Generador de portada para documentos de la UNAN-Managua. Crea portadas personalizadas con fecha, facultad, carrera y datos de clase."
     />
     <meta name="author" content="Deybis Antonio Melendez Vargas" />
-    <meta property="og:title" content="Generador de Portada INATEC PDF" />
-    <meta
-      property="og:description"
-      content="Una herramienta en línea para generar portadas personalizadas para documentos académicos del Instituto Nacional Tecnológico."
-    />
-    <meta property="og:image" content="/inatec_logo.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Generador de Portada INATEC PDF" />
-    <meta
-      name="twitter:description"
-      content="Una herramienta en línea para generar portadas personalizadas para documentos académicos del Instituto Nacional Tecnológico."
-    />
-    <meta name="twitter:image" content="/inatec_logo.png" />
-    <meta name="twitter:site" content="@DeybisMelendez" />
     <title>Generador de Portada UNAN PDF</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"
     />
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <style>
+        header { text-align: center; padding: 2rem 0; }
+        header img { max-width: 250px; margin-bottom: 1rem; }
+        #generarPDF { width: 100%; font-weight: bold; }
+    </style>
   </head>
   <body>
     <main class="container">
       <header>
-        <h1>GENERADOR PORTADA UNAN</h1>
-        <img src="./inatec_logo.png" alt="Logo de INATEC" />
-        <a
-          class="github-button"
-          href="https://github.com/echacon97"
-          data-color-scheme="no-preference: light; light: light; dark: dark;"
-          data-size="large"
-          aria-label="Follow @echacon97 on GitHub"
-          >Follow @echacon97</a
-        >
-        <a
-          class="github-button"
-          href="https://github.com/echacon97/portada-inatec"
-          data-color-scheme="no-preference: light; light: light; dark: dark;"
-          data-icon="octicon-star"
-          data-size="large"
-          aria-label="Star echacon97/portada-inatec on GitHub"
-          >Star</a
-        >
-        <a
-          class="github-button"
-          href="https://github.com/echacon97/portada-inatec/fork"
-          data-color-scheme="no-preference: light; light: light; dark: dark;"
-          data-icon="octicon-repo-forked"
-          data-size="large"
-          aria-label="Fork echacon97/portada-inatec on GitHub"
-          >Fork</a
-        >
+        <img src="unan logo.jpg" alt="Logo de la UNAN-Managua" />
+        <h1>GENERADOR DE PORTADA UNAN</h1>
       </header>
+      
       <section>
         <div class="grid">
           <div>
             <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" id="fecha" />
+            <input type="date" id="fecha" />
           </div>
           <div>
             <label for="lugar">Lugar</label>
-            <input
-              type="text"
-              name="lugar"
-              id="lugar"
-              placeholder="Lugar"
-              value="Managua, Nicaragua"
-            />
+            <input type="text" id="lugar" value="Managua, Nicaragua" />
           </div>
-        </div>
-        <div class="grid">
-          <div>
-            <label for="centro">Nombre del centro</label>
-            <input
-              type="text"
-              name="centro"
-              id="centro"
-              placeholder="Centro"
-              value=""
-            />
-          </div>
-          <div>
-            <label for="carrera">Nombre de la carrera</label>
-            <input
-              type="text"
-              name="carrera"
-              id="carrera"
-              placeholder="Carrera"
-              value=""
-            />
-          </div>
-        </div>
-        <div class="grid">
-          <div>
-            <label for="modulo">Nombre del módulo</label>
-            <input type="text" name="modulo" id="modulo" placeholder="Módulo" />
-          </div>
-          <div>
-            <label for="docente">Nombre del docente</label>
-            <input
-              type="text"
-              name="docente"
-              id="docente"
-              placeholder="Docente"
-            />
-          </div>
-        </div>
-        <div>
-          <label for="tarea">Nombre de la tarea</label>
-          <textarea name="tarea" id="tarea" placeholder="Tarea" ></textarea>
-        </div>
-        <div>
-          <label for="estudiantes">Elaborado por</label>
-          <textarea
-            name="estudiantes"
-            id="estudiantes"
-            placeholder="Elaborado por"
-          ></textarea>
         </div>
 
-        <button id="generarPDF">Generar PDF</button>
+        <div class="grid">
+          <div>
+            <label for="centro">Facultad / Recinto</label>
+            <input type="text" id="centro" placeholder="Ej: Facultad de Ciencias e Ingeniería" />
+          </div>
+          <div>
+            <label for="carrera">Carrera</label>
+            <input type="text" id="carrera" placeholder="Nombre de la carrera" />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="modulo">Asignatura / Componente</label>
+            <input type="text" id="modulo" placeholder="Nombre de la materia" />
+          </div>
+          <div>
+            <label for="docente">Nombre del Docente</label>
+            <input type="text" id="docente" placeholder="Grado y nombre del docente" />
+          </div>
+        </div>
+
+        <div>
+          <label for="tarea">Título del Trabajo / Tema</label>
+          <textarea id="tarea" placeholder="Describa el tema central del trabajo"></textarea>
+        </div>
+
+        <div>
+          <label for="estudiantes">Elaborado por (Integrantes):</label>
+          <textarea id="estudiantes" placeholder="Un nombre por línea o Nombre y Carnet" rows="4"></textarea>
+        </div>
+
+        <button id="generarPDF">Generar Portada PDF</button>
       </section>
     </main>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="./app.js"></script>
   </body>
